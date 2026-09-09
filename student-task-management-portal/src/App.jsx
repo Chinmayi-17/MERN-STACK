@@ -1,9 +1,15 @@
-import Welcome from "./components/Welcome"
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Welcome from "./components/Welcome";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <Navbar />
       <Welcome />
+      <Dashboard />
+      
     </div>
   );
 }
