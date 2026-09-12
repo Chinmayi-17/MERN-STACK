@@ -1,9 +1,10 @@
-function StatCard(bunty){
-    return(
+function StatCard({ title, value }) {
+    return (
         <div className="stat-card">
-            <h3>{bunty.title}</h3>
-            <h2>{bunty.value}</h2>
+            <h3>{title}</h3>
+            <strong>{value}</strong>
         </div>
     );
 }
+
 export default StatCard;

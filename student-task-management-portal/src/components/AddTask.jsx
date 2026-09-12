@@ -1,40 +1,54 @@
 import { useState } from "react";
 
-function AddTask(props) {
+function AddTask({ onAddTask }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
-        const task={
-            id:Date.now(),
-            title:title,
-            description:description,
-            status:"Pending"
+
+        const trimmedTitle = title.trim();
+        const trimmedDescription = description.trim();
+
+        if (!trimmedTitle || !trimmedDescription) return;
+
+        const newTask = {
+            id: Date.now(),
+            title: trimmedTitle,
+            description: trimmedDescription,
+            status: "Pending"
         };
-        console.log("object",task);
+
+        onAddTask(newTask);
+
+        setTitle("");
+        setDescription("");
     }
 
     return (
-        <div>
-            <label>Add Task</label>
-            <form onSubmit={handleSubmit}>
+        <div className="add-task-panel">
+            <h2>Add New Task</h2>
+
+            <form className="task-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
+                    placeholder="Task title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                 />
-                <p>Current title: {title}</p>
-                <br></br>
 
-                <label>Add Description</label>
                 <input
                     type="text"
+                    placeholder="Task description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    required
                 />
-                <button type="submit">Add Task</button>
-                <p>Current description: {description}</p>
+
+                <button className="primary-btn" type="submit">
+                    Add Task
+                </button>
             </form>
         </div>
     );
